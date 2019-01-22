@@ -1,5 +1,6 @@
 ﻿using MVC0117.DAL;
 using MVC0117.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,15 +8,50 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace MVC0117.Controllers
 {
     public class AccountController : Controller
     {
         private AccountContext db = new AccountContext();
         // GET: Account
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            return View(db.SysUsers);
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.currentFilter = searchString;
+            var users = from u in db.SysUsers
+                        select u;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(u => u.UserName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    users = users.OrderByDescending(u => u.UserName);
+                    break;
+                default:
+                    users = users.OrderBy(u => u.UserName);
+                    break;
+
+            }
+            int pagesize = 3;
+            int pageNumber = (page ?? 1);
+
+            return View(users.ToPagedList(pageNumber, pagesize));
         }
 
 

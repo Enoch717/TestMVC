@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<h1>understand @@Html.Partial </h1>
+@Html.Partial("~/Views/Shared/_PartialPageWidget.cshtml")
+
+<h1>understand @@Html.RenderPartial</h1>
+@{
+    Html.RenderPartial("~/Views/Shared/_PartialPageWidget.cshtml");
+
+}
+
+<h1>understand @@Html.Action </h1>
+@Html.Action("ShowWidget");
+<h1>understand @@Html.RenderAction </h1>
+@{ 
+    Html.RenderAction("ShowWidget");
+}
+<hr />
+<hi>different format to show time</hi>

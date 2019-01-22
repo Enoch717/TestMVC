@@ -1,29 +1,40 @@
-﻿
+﻿@*@model IEnumerable<MVC0117.Models.SysUser>*@
+
+@model PagedList.IPagedList<MVC0117.Models.SysUser>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
-<!DOCTYPE html>
+<p>@Html.ActionLink("Create New ", "Create")</p>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    @model IEnumerable<MVC0117.Models.SysUser>
-    <div>
-        <p>@Html.ActionLink("Create New ", "Create")</p>
-        <table>
+@using (Html.BeginForm("Index", "Account", FormMethod.Post))
+{
+    <p>
+        Find by name:@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thread>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.UserName)
+                    @Html.ActionLink("UserName", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Email)
+                    @*@Html.DisplayNameFor(model => model.Email)*@
+                    Email
                 </th>
             </tr>
+        </thread>
+        <tbody>
+
             @foreach (var item in Model)
             {
                 <tr>
@@ -40,8 +51,12 @@
                     </td>
                 </tr>
             }
+        </tbody>
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("index", new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
 
-        </table>
-    </div>
-</body>
-</html>
+
+</div>
+
