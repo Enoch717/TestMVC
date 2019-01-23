@@ -31,25 +31,37 @@
                     @*@Html.DisplayNameFor(model => model.Email)*@
                     Email
                 </th>
+                <th>
+                    CreateDate
+                </th>
+                <th>
+                    Department
+                </th>
             </tr>
         </thread>
         <tbody>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.ID })
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SysDepartment.DepartmentName)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
             }
         </tbody>
     </table>

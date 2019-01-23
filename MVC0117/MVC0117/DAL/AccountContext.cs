@@ -8,14 +8,14 @@ using System.Web;
 
 namespace MVC0117.DAL
 {
-    public class AccountContext: System.Data.Entity.DbContext
+    public class AccountContext : System.Data.Entity.DbContext
     {
         public AccountContext()
-            :base("AccountContext")
+            : base("AccountContext")
         {
 
         }
-
+        public DbSet<Test> Tests { get; set; }
         public DbSet<SysUser> SysUsers { get; set; }
 
         public DbSet<SysRole> SysRoles { get; set; }
