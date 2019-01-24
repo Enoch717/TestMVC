@@ -4,6 +4,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -58,7 +59,14 @@ namespace MVC0117.Controllers
 
         public ActionResult Details(int id)
         {
-            SysUser sysUser = db.SysUsers.Find(id);
+            //SysUser sysUser = db.SysUsers.Find(id);
+            string query = "select LoginName as UserName, * from [dbo].[SysUser] where ID=@id";
+            SqlParameter[] paras = new SqlParameter[]
+            {
+                new SqlParameter("@id",id)
+            };
+            SysUser sysUser = db.SysUsers.SqlQuery(query, paras).SingleOrDefault();
+
             return View(sysUser);
         }
 

@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MVCDemoController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="DAL\AccountContext.cs" />
     <Compile Include="DAL\AccountInitializer.cs" />
     <Compile Include="Migrations\201901230740308_InitialCreate.cs" />
@@ -208,6 +209,7 @@
     </Compile>
     <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AssignedRoleData.cs" />
     <Compile Include="ViewModels\UserRoleIndexData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -739,6 +741,8 @@
     <Content Include="Views\Shared\_PartialPageWidget.cshtml" />
     <Content Include="Views\MVCDemo\_PartialPageDateTime.cshtml" />
     <Content Include="Views\MVCDemo\SharedDateDemo.cshtml" />
+    <Content Include="Views\UserRole\Index.cshtml" />
+    <Content Include="Views\UserRole\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

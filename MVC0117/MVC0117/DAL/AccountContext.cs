@@ -26,6 +26,7 @@ namespace MVC0117.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+        public System.Data.Entity.DbSet<MVC0117.Models.SysDepartment> SysDepartments { get; set; }
 
     }
 }
